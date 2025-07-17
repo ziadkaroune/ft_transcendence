@@ -34,16 +34,25 @@ export function renderGamePage() {
   const [p1, p2] = queue;
 
   app.innerHTML = `
-    <h2 class="text-xl mb-2">Now Playing: ${p1} vs ${p2}</h2>
-    <canvas id="pong" width="640" height="480" class="border border-white"></canvas>
-    <div class="mt-4 space-x-2">
-      <button id="nextMatch" class="px-4 py-2 bg-green-600 hover:bg-green-700">Next Match</button>
-      <button onclick="location.href='/'" class="px-4 py-2 bg-gray-700 hover:bg-gray-600">Back</button>
-    </div>
+  <div class="relative h-screen w-screen bg-black overflow-hidden bg-gradient-to-br from-purple-900 via-black to-blue-900 ">
+  <!-- Background Glow & Grid -->
+
+    <h2 id="scoreDisplay" class="text-xl text-white h-32 flex justify-center items-center"></h2>
+    
+       <canvas id="pong" width="640" height="480" class="border border-white mx-auto"></canvas>
+ 
+    <div id="scoreDisplay" class=" text-lg mt-2 text-white"></div>
+        <div class="mt-4 space-x-2 text-center">
+          <button id="nextMatch" class="px-4 py-2  bg-purple-800 hover:bg-purple-900  rounded-lg font-bold shadow-md transition">Next Match</button>
+          <button onclick="location.href='/register'" class="px-4 py-2 bg-gray-700 hover:bg-gray-600">Back</button>
+        </div>
+     </div>
+       </div>
   `;
 
   startGame((winner: string) => {
     saveMatch(winner, p1, p2);
+    // Winner text is already handled inside `startGame`
   });
 
   document.getElementById('nextMatch')?.addEventListener('click', () => {
